@@ -1,0 +1,122 @@
+{
+  "dotGitignore": {
+    "header": {},
+    "additionalEntries": {"entries": ""},
+    "filesToIgnore": {"tags": [
+      {
+        "name": "eclipse",
+        "value": "eclipse"
+      },
+      {
+        "name": "gradle",
+        "value": "gradle"
+      },
+      {
+        "name": "java",
+        "value": "java"
+      }
+    ]}
+  },
+  "buildDotGradle": {
+    "jvm": {
+      "targetCompatibility": {
+        "name": "java8",
+        "value": "1.8"
+      },
+      "sourceCompatibility": {
+        "name": "java8",
+        "value": "1.8"
+      }
+    },
+    "javadoc": {"jvm": {
+      "name": "java8",
+      "value": "8"
+    }},
+    "copyrightr": {
+      "onlyReplaceFirst": true,
+      "dryRun": false,
+      "yearSeparator": " - ",
+      "copyrightHolder": "Synapticloop"
+    },
+    "plugins": {"plugins": [
+      {
+        "name": "java",
+        "value": "id 'java'"
+      },
+      {
+        "name": "eclipse",
+        "value": "id 'eclipse'"
+      },
+      {
+        "name": "versions",
+        "value": "id 'com.github.ben-manes.versions' version '0.14.0'"
+      },
+      {
+        "name": "copyrightr",
+        "value": "id 'synapticloop.copyrightr' version '1.1.2'"
+      },
+      {
+        "name": "documentr",
+        "value": "id 'synapticloop.documentr' version '2.9.0'"
+      },
+      {
+        "name": "github-publish",
+        "value": "id 'co.riiid.gradle' version '0.4.2'"
+      },
+      {
+        "name": "bintray-publish",
+        "value": "id 'com.jfrog.bintray' version '1.7.'"
+      }
+    ]},
+    "header": {},
+    "information": {
+      "archivesBaseName": "json-feed",
+      "description": "JSON Feed Parser and creator in Java",
+      "version": "0.0.1",
+      "group": "synapticloop"
+    },
+    "documentr": {
+      "extension": {
+        "name": "MarkDown",
+        "value": "md"
+      },
+      "directory": ".",
+      "verbose": false
+    },
+    "githubPublish": {},
+    "bintrayPublish": {
+      "publication": "synapticloop",
+      "name": "json-feed"
+    },
+    "dependencies": {
+      "compileDependencies": [{
+        "name": "org-json",
+        "value": "'org.json:json:20160810'"
+      }],
+      "repositories": [
+        {
+          "name": "maven local",
+          "value": "mavenLocal()"
+        },
+        {
+          "name": "maven central",
+          "value": "mavenCentral()"
+        },
+        {
+          "name": "jcenter",
+          "value": "jcenter()"
+        }
+      ],
+      "testDependencies": [
+        {
+          "name": "junit",
+          "value": "'junit:junit:4.12'"
+        },
+        {
+          "name": "mockito",
+          "value": "'org.mockito:mockito-all:1.10.19'"
+        }
+      ]
+    }
+  }
+}
