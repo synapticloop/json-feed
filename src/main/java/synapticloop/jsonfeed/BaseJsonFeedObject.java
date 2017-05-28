@@ -31,6 +31,7 @@ import synapticloop.jsonfeed.exception.ValidationException;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.slf4j.Logger;
+
 /**
  * This is the base class for all of the JSON feed objects.  This allows the 
  * addition of extensions at any level.
