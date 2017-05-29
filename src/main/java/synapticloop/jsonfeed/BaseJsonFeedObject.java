@@ -427,14 +427,17 @@ public abstract class BaseJsonFeedObject {
 	 * 
 	 * @return true if this is required and is null, false if not null
 	 */
-	public boolean validateRequiredInError(Object object, String key) {
+	protected boolean validateRequiredInError(Object object, String key) {
 		if(null == object) {
-			String validationError = String.format(LOGGER_KEY_MUST_NOT_BE_NULL, getLogger().getName(), key);
-			getLogger().error(validationError);
-			validationErrors.add(validationError);
+			addValidationErrorAndLog(String.format(LOGGER_KEY_MUST_NOT_BE_NULL, getLogger().getName(), key));
 			return(true);
 		}
 
 		return(false);
+	}
+	
+	protected void addValidationErrorAndLog(String validationError) {
+		validationErrors.add(validationError);
+		getLogger().error(validationError);
 	}
 }
