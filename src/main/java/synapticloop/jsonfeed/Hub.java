@@ -69,11 +69,13 @@ public class Hub extends BaseJsonFeedObject {
 
 	@Override
 	public void validate() throws ValidationException {
-		if(null == url || null == type) {
-			String validationError = String.format(VALIDATION_ERROR_BOTH_KEYS_MUST_NOT_BE_NULL_VALUES_WERE, LOGGER.getName(), KEY_URL, KEY_TYPE, url, type);
-			LOGGER.error(validationError);
-			validationErrors.add(validationError);
-			throw new ValidationException(validationError);
+		boolean isInError = false;
+		isInError = validateRequiredInError(url, KEY_URL) || isInError;
+		isInError = validateRequiredInError(type, KEY_TYPE) || isInError;
+
+
+		if(isInError) {
+			throw new ValidationException("Could not validate hub.");
 		}
 	}
 

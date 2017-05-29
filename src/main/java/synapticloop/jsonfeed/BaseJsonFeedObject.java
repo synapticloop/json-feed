@@ -37,6 +37,7 @@ import org.slf4j.Logger;
  * addition of extensions at any level.
  */
 public abstract class BaseJsonFeedObject {
+	private static final String LOGGER_KEY_MUST_NOT_BE_NULL = "[%s] Key '%s' _MUST_NOT_ be null";
 	private static final String LOGGER_COULD_NOT_PARSE_ARRAY_FOR_KEY_VALUE_WAS_NOT_A_STRING = "Could not parse array for key '{}', value '{}' was not a string";
 	private static final String LOGGER_KEY_VALUE_ADDED_TO_STRING_ARRAY = "Key '{}', value '{}' added to string array";
 	private static final String LOGGER_KEY_REMOVED_FROM_JSON_OBJECT = "Key '{}' removed from JSON Object";
@@ -176,6 +177,7 @@ public abstract class BaseJsonFeedObject {
 	/**
 	 * Read an array of objects into a typed array
 	 * 
+	 * @param <T> the type of the object for the list
 	 * @param jsonObject The jsonObject to read from
 	 * @param key The key to look up
 	 * @param objectClass The class of the object to instantiate
@@ -226,7 +228,7 @@ public abstract class BaseJsonFeedObject {
 	}
 
 	/**
-	 * Read a JSON array of strings into a List<String>.  This will remove the 
+	 * Read a JSON array of strings into a List&lt;String&gt;.  This will remove the 
 	 * JSONArray once parsed.
 	 *  
 	 * @param jsonObject The JSON Object to get the JSON array from
@@ -328,7 +330,8 @@ public abstract class BaseJsonFeedObject {
 
 	/**
 	 * Get all of the extensions that are available on this JSON Feed Object
-	 * @return
+	 * 
+	 * @return the map of extensions
 	 */
 	public Map<String, Extension> getExtensions() { return extensions; }
 
@@ -368,7 +371,7 @@ public abstract class BaseJsonFeedObject {
 	 * 
 	 * @param jsonObject The JSON Object to add the3 extension to.
 	 */
-	protected void addExtensions(JSONObject jsonObject) {
+	protected void addExtensionsToJSON(JSONObject jsonObject) {
 		Iterator<String> iterator = extensions.keySet().iterator();
 		while (iterator.hasNext()) {
 			String key = (String) iterator.next();
@@ -426,7 +429,8 @@ public abstract class BaseJsonFeedObject {
 	 */
 	public boolean validateRequiredInError(Object object, String key) {
 		if(null == object) {
-			String validationError = String.format("[%s] Key '{}' _MUST_NOT_ be null", getLogger().getName(), key);
+			String validationError = String.format(LOGGER_KEY_MUST_NOT_BE_NULL, getLogger().getName(), key);
+			getLogger().error(validationError);
 			validationErrors.add(validationError);
 			return(true);
 		}

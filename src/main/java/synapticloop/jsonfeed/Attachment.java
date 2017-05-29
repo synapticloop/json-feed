@@ -32,7 +32,6 @@ import org.slf4j.LoggerFactory;
 public class Attachment extends BaseJsonFeedObject {
 	private static final Logger LOGGER = LoggerFactory.getLogger(Attachment.class);
 
-	private static final String VALIDATION_ERROR_KEY_MUST_NOT_BE_NULL = "[%s] key %s _MUST NOT_ be null";
 	private static final String VALIDATION_ERROR_KEYS_CANNOT_BE_NULL = "[%s] %s and %s cannot be null";
 
 
@@ -50,7 +49,7 @@ public class Attachment extends BaseJsonFeedObject {
 	private Long durationInSeconds;
 
 	/**
-	 * Instantiate a new attachement object
+	 * Instantiate a new attachment object
 	 * 
 	 * @param url The URL which points to the attachment
 	 * @param mimeType The mimetype of the attachment
@@ -82,6 +81,11 @@ public class Attachment extends BaseJsonFeedObject {
 		warnOnMissingKeys(jsonObject);
 	}
 
+	/**
+	 * url (required, string) specifies the location of the attachment.
+	 * 
+	 * @return the location of the attachment
+	 */
 	public String getUrl() { return url; }
 
 	public String getMimeType() { return mimeType; }
@@ -112,7 +116,7 @@ public class Attachment extends BaseJsonFeedObject {
 		addKeyValue(jsonObject, KEY_SIZE_IN_BYTES, this.sizeInBytes);
 		addKeyValue(jsonObject, KEY_DURATION_IN_SECONDS, this.durationInSeconds);
 
-		addExtensions(jsonObject);
+		addExtensionsToJSON(jsonObject);
 
 		return(jsonObject);
 	}
@@ -125,20 +129,8 @@ public class Attachment extends BaseJsonFeedObject {
 	@Override
 	public void validate() throws ValidationException {
 		boolean isInError = false;
-		// go through and validate the attachment
-		if(null == url) {
-			String validationError = String.format(VALIDATION_ERROR_KEY_MUST_NOT_BE_NULL, LOGGER.getName(), KEY_URL);
-			LOGGER.error(validationError);
-			validationErrors.add(validationError);
-			isInError = true;
-		}
-
-		if(null == mimeType) {
-			String validationError = String.format(VALIDATION_ERROR_KEY_MUST_NOT_BE_NULL, LOGGER.getName(), KEY_MIME_TYPE);
-			LOGGER.error(validationError);
-			validationErrors.add(validationError);
-			isInError = true;
-		}
+		isInError = validateRequiredInError(url, KEY_URL) || isInError;
+		isInError = validateRequiredInError(mimeType, KEY_MIME_TYPE) || isInError ;
 
 		if(isInError) {
 			String validationException = String.format(VALIDATION_ERROR_KEYS_CANNOT_BE_NULL, LOGGER.getName(), KEY_URL, KEY_MIME_TYPE);

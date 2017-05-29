@@ -26,6 +26,12 @@ import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * The feed is the root of all of the objects 
+ * 
+ * @author Synapticloop
+ *
+ */
 public class Feed extends BaseJsonFeedObject {
 	private static final Logger LOGGER = LoggerFactory.getLogger(Feed.class);
 
@@ -109,6 +115,10 @@ public class Feed extends BaseJsonFeedObject {
 	public Feed(String version, String title) {
 		this.version = version;
 		this.title = title;
+	}
+
+	public Feed(String jsonString) {
+		this(new JSONObject(jsonString));
 	}
 
 	public Feed(JSONObject jsonObject) {
@@ -247,7 +257,7 @@ public class Feed extends BaseJsonFeedObject {
 			addKeyValue(jsonObject, KEY_HUBS, hubsArray);
 		}
 
-		addExtensions(jsonObject);
+		addExtensionsToJSON(jsonObject);
 
 		return(jsonObject);
 	}
@@ -255,8 +265,8 @@ public class Feed extends BaseJsonFeedObject {
 	@Override
 	public void validate() throws ValidationException {
 		boolean isInError = false;
-		isInError = isInError || validateRequiredInError(version, KEY_VERSION);
-		isInError = isInError || validateRequiredInError(title, KEY_TITLE);
+		isInError = validateRequiredInError(version, KEY_VERSION) || isInError;
+		isInError = validateRequiredInError(title, KEY_TITLE) || isInError;
 
 		if(null != author) {
 			try {

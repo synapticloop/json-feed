@@ -238,7 +238,9 @@ public class Item extends BaseJsonFeedObject {
 			isInError = true;
 		}
 
-		throw new ValidationException("Could not validate Item");
+		if(isInError) {
+			throw new ValidationException("Could not validate Item");
+		}
 	}
 
 

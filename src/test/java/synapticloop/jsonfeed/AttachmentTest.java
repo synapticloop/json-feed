@@ -9,6 +9,8 @@ import synapticloop.jsonfeed.exception.ValidationException;
 import org.json.JSONObject;
 
 public class AttachmentTest {
+	private static final String DUMMY_MIMETYPE = "application/something";
+	private static final String DUMMY_URL = "http://some-url.com/";
 	private Attachment attachment = null;
 	private static final String LITE_STRING = "{ \"url\": \"http://some-url.com/\", \"mime_type\": \"application/something\" }";
 	private static final String HEAVY_STRING = "{\"url\": \"http://some-url.com/\",\"mime_type\": \"application/something\",\"title\": \"this is the title of the attachment\",\"size_in_bytes\": 100,\"duration_in_seconds\": 400,\"_some_attachment_extension\": { \"about\": \"https://blueshed-podcasts.com/json-feed-extension-docs\",\"explicit\": false,\"copyright\": \"1948 by George Orwell\",\"owner\": \"Big Brother and the Holding Company\",\"subtitle\": \"All shouting, all the time. Double. Plus. Good.\"}}";
@@ -45,20 +47,22 @@ public class AttachmentTest {
 	@Test
 	public void testJSONInstantiateLite() {
 		Attachment attachment = new Attachment(new JSONObject(LITE_STRING));
-		assertEquals("http://some-url.com/", attachment.getUrl());
-		assertEquals("application/something", attachment.getMimeType());
+		assertEquals(DUMMY_URL, attachment.getUrl());
+		assertEquals(DUMMY_MIMETYPE, attachment.getMimeType());
 		assertEquals(0, attachment.getUnMappedKeys());
 	}
 
 	@Test
 	public void testJSONInstantiateHeavy() throws ValidationException {
 		Attachment attachment = new Attachment(new JSONObject(HEAVY_STRING));
-		assertEquals("http://some-url.com/", attachment.getUrl());
-		assertEquals("application/something", attachment.getMimeType());
+		assertEquals(DUMMY_URL, attachment.getUrl());
+		assertEquals(DUMMY_MIMETYPE, attachment.getMimeType());
 		assertEquals(0, attachment.getUnMappedKeys());
 		attachment.validate();
 		assertEquals(0,  attachment.getValidationErrors().size());
 		JSONObject jsonObject = new JSONObject(attachment.toString());
+		assertEquals(DUMMY_URL, jsonObject.getString(BaseJsonFeedObject.KEY_URL));
+		assertEquals(DUMMY_MIMETYPE, jsonObject.getString(BaseJsonFeedObject.KEY_MIME_TYPE));
 	}
 
 	@Test
