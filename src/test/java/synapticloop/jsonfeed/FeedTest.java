@@ -1,6 +1,5 @@
 package synapticloop.jsonfeed;
 
-import java.io.InputStream;
 import java.util.List;
 
 import synapticloop.jsonfeed.exception.ValidationException;

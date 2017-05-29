@@ -29,8 +29,8 @@ import org.slf4j.LoggerFactory;
 public class Extension extends BaseJsonFeedObject {
 	private static final Logger LOGGER = LoggerFactory.getLogger(Extension.class);
 
-	private static final String VALIDATION_ERROR_KEY_MUST_NOT_START_WITH_AN_UNDERSCORE_CHARACTER = "[%s] key %s _MUST_ not start with an underscore character '_'";
-	private static final String VALIDATION_ERROR_KEY_MUST_NOT_START_CONTAIN_AN_FULL_STOP_CHARACTER = "[%s] key %s _MUST_ not start contain an full-stop character '.'";
+	private static final String VALIDATION_ERROR_KEY_MUST_NOT_START_WITH_AN_UNDERSCORE_CHARACTER = "[%s] key %s _MUST_NOT_ start with an underscore character '_'";
+	private static final String VALIDATION_ERROR_KEY_MUST_NOT_CONTAIN_A_FULL_STOP_CHARACTER = "[%s] key %s _MUST_NOT_ contain a full-stop character '.'";
 	private static final String VALIDATION_ERROR_KEYS_WERE_NOT_CORRECTLY_NAMED = "[%s] Keys were not correctly named";
 
 	private Map<String, Object> keyValues = new LinkedHashMap<String, Object>();
@@ -81,7 +81,7 @@ public class Extension extends BaseJsonFeedObject {
 			}
 
 			if(key.contains(".")) {
-				String validationError = String.format(VALIDATION_ERROR_KEY_MUST_NOT_START_CONTAIN_AN_FULL_STOP_CHARACTER, LOGGER.getName(), key);
+				String validationError = String.format(VALIDATION_ERROR_KEY_MUST_NOT_CONTAIN_A_FULL_STOP_CHARACTER, LOGGER.getName(), key);
 				isInError = true;
 				validationErrors.add(validationError);
 			}
