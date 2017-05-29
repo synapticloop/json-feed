@@ -51,6 +51,10 @@ public class Extension extends BaseJsonFeedObject {
 		keyValues.put(key, value);
 	}
 
+	public Object getValue(String key) {
+		return(keyValues.get(key));
+	}
+
 	@Override
 	protected Logger getLogger() {
 		return(LOGGER);
