@@ -203,6 +203,8 @@ public class Item extends BaseJsonFeedObject {
 
 	@Override
 	public void validate() throws ValidationException {
+		validationErrors.clear();
+
 		boolean isInError = false;
 		if(null == id) {
 			String validationError = String.format("[%s] Key '{}' _MUST_NOT_ be null", LOGGER.getName(), KEY_ID);

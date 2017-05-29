@@ -86,6 +86,8 @@ public class Author extends BaseJsonFeedObject {
 
 	@Override
 	public void validate() throws ValidationException {
+		validationErrors.clear();
+
 		if(null == this.name && null == this.url && null == this.avatar) {
 			String validationError = String.format(VALIDATION_ERROR_AT_LEAST_ONE_OF_MUST_BE_PRESENT_ALL_VALUES_WERE_NULL, LOGGER.getName(), KEY_NAME, KEY_URL, KEY_AVATAR);
 			LOGGER.error(validationError);

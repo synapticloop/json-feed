@@ -68,6 +68,6 @@ public class HubTest {
 		} catch (ValidationException e) {
 			// do nothing
 		}
-		assertEquals(1,  hub.getValidationErrors().size());
+		assertEquals(2,  hub.getValidationErrors().size());
 	}
 }

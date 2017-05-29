@@ -25,6 +25,8 @@ import org.slf4j.LoggerFactory;
 public class Hub extends BaseJsonFeedObject {
 	private static final Logger LOGGER = LoggerFactory.getLogger(Hub.class);
 
+	private static final String COULD_NOT_VALIDATE_HUB = "Could not validate " + Hub.class.getSimpleName() + ".";
+
 	private static final String VALIDATION_ERROR_BOTH_KEYS_MUST_NOT_BE_NULL_VALUES_WERE = "[%s] Both keys '%s' and '%s' _MUST_NOT_ be null, values were '%s' and '%s'";
 
 	// The type field describes the protocol used to talk with the hub, such as "rssCloud" or "WebSub."
@@ -69,13 +71,14 @@ public class Hub extends BaseJsonFeedObject {
 
 	@Override
 	public void validate() throws ValidationException {
+		validationErrors.clear();
+
 		boolean isInError = false;
 		isInError = validateRequiredInError(url, KEY_URL) || isInError;
 		isInError = validateRequiredInError(type, KEY_TYPE) || isInError;
 
-
 		if(isInError) {
-			throw new ValidationException("Could not validate hub.");
+			throw new ValidationException(COULD_NOT_VALIDATE_HUB);
 		}
 	}
 

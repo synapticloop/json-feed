@@ -69,6 +69,7 @@ public class Extension extends BaseJsonFeedObject {
 
 	@Override
 	public void validate() throws ValidationException {
+		validationErrors.clear();
 		boolean isInError = false;
 		Iterator<String> iterator = keyValues.keySet().iterator();
 		while (iterator.hasNext()) {

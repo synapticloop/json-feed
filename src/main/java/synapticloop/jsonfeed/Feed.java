@@ -264,6 +264,8 @@ public class Feed extends BaseJsonFeedObject {
 
 	@Override
 	public void validate() throws ValidationException {
+		validationErrors.clear();
+
 		boolean isInError = false;
 		isInError = validateRequiredInError(version, KEY_VERSION) || isInError;
 		isInError = validateRequiredInError(title, KEY_TITLE) || isInError;

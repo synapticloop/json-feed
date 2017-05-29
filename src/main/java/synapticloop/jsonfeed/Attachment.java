@@ -128,6 +128,8 @@ public class Attachment extends BaseJsonFeedObject {
 
 	@Override
 	public void validate() throws ValidationException {
+		validationErrors.clear();
+
 		boolean isInError = false;
 		isInError = validateRequiredInError(url, KEY_URL) || isInError;
 		isInError = validateRequiredInError(mimeType, KEY_MIME_TYPE) || isInError ;
