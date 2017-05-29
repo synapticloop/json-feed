@@ -118,9 +118,9 @@ The `--info` switch will also output logging for the tests
 
 ```
 dependencies {
-	runtime(group: 'synapticloop', name: 'json-feed', version: '0.0.1', ext: 'jar')
+	runtime(group: 'synapticloop', name: 'json-feed', version: '1.0.0', ext: 'jar')
 
-	compile(group: 'synapticloop', name: 'json-feed', version: '0.0.1', ext: 'jar')
+	compile(group: 'synapticloop', name: 'json-feed', version: '1.0.0', ext: 'jar')
 }
 ```
 
@@ -132,9 +132,9 @@ or, more simply for versions of gradle greater than 2.1
 
 ```
 dependencies {
-	runtime 'synapticloop:json-feed:0.0.1'
+	runtime 'synapticloop:json-feed:1.0.0'
 
-	compile 'synapticloop:json-feed:0.0.1'
+	compile 'synapticloop:json-feed:1.0.0'
 }
 ```
 
@@ -152,7 +152,7 @@ dependencies {
 <dependency>
 	<groupId>synapticloop</groupId>
 	<artifactId>json-feed</artifactId>
-	<version>0.0.1</version>
+	<version>1.0.0</version>
 	<type>jar</type>
 </dependency>
 ```
